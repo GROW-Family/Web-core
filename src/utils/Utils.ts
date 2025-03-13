@@ -8,10 +8,6 @@ import { toCaseStyle } from './StringUtils';
 
 import { domains } from '@/constants/Domain';
 
-export const test = () => {
-    console.log("TCL: test -> test")
-}
-
 export const isUndefined = (value: any): boolean =>
     ['undefined', 'NaN', undefined, '', null, 'null', false, 'false', 'Invalid date', Infinity].includes(value);
 

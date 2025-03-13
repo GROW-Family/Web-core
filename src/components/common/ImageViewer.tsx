@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import clsx from 'clsx';
 import { memo, useEffect, useRef, useState } from 'react';
@@ -6,12 +6,14 @@ import { ReactSVG } from 'react-svg';
 
 import { getImageSize } from '@/utils/FileUtils';
 import { isArray, isNumber, isString } from '@/utils/Utils';
-
-import { ImageViewerProps } from '@/models/ComponentModels';
-import defaultError from '@/static/images/img_error.png';
-import { colors } from '@/styles/theme';
 import { getSvgStyle } from '@/utils/StyleUtils';
 import { getHTMLAttributes } from '@/utils/StringUtils';
+
+import { colors } from '@/styles/theme';
+
+import { ImageViewerProps } from '@/models/ComponentModels';
+
+import defaultError from '@/static/images/img_error.png';
 
 type CompStates = {
     expectWidth?: any;
@@ -72,7 +74,7 @@ const ImageViewer = ({
     const [isError, setIsError] = useState<boolean>(false);
     const [expectSize, setExpectSize] = useState<{ width?: number; height?: number }>({});
     const [reRender, setReRender] = useState(false);
-    
+
     const isFunc = typeof onClick === 'function';
     const isHandleError = !!(lazyload || fallbackSrc || onError);
     const imgSize = size ? (isNumber(size) ? size + 'px' : size) : 16;
@@ -96,7 +98,6 @@ const ImageViewer = ({
         setIsError(false);
         setRenderReady(!src || (src && !useRatio));
         handleGetExpectSize();
-        
     }, [useRatio]);
 
     const baseClass = clsx(

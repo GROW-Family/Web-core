@@ -637,6 +637,11 @@ ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+anchorme@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/anchorme/-/anchorme-3.0.8.tgz#c2f89985f56ac57aa6fd3b17cc78da8b84a4eec9"
+  integrity sha512-K61vxP907NA0Pv4z5v7xbiwosAjhdjCVUFGOFm1TEDFbKmK9/dRLT1jirFIQUuE5ni78Mv4D3Yr4rnQT1PJl9w==
+
 argparse@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/argparse/-/argparse-2.0.1.tgz"

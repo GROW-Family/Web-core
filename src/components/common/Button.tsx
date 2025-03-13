@@ -1,8 +1,10 @@
-import React from 'react';
 import clsx from 'clsx';
 
 import Link from 'next/link';
 import ImageViewer from './ImageViewer';
+
+import { colorStyle, variants } from '@/styles/theme';
+
 import { ButtonProps } from '@/models/ComponentModels';
 
 const Button = ({
@@ -11,7 +13,6 @@ const Button = ({
     height,
     size = 'medium',
     color,
-    background,
     tooltip,
     variant,
     outlined = false,
@@ -23,18 +24,14 @@ const Button = ({
     startIcon,
     endIcon,
     icon,
-    align,
     children,
     onClick,
-    unHover = false,
-    isActive = false,
     className,
     style,
     target,
     startAdornment,
     endAdornment,
 }: ButtonProps) => {
-    
     const baseStyles = 'flex items-center justify-center rounded-lg transition-all duration-200 cursor-pointer';
 
     const sizeStyles =
@@ -57,8 +54,9 @@ const Button = ({
     const finalClassName = clsx(
         baseStyles,
         sizeStyles,
-        // hoverStyles,
-        // activeStyles,
+        outlined && 'bg-transparent border-2',
+        color && colorStyle[color],
+        variant && variants[variant],
         { 'w-full': fullWidth, 'opacity-50 cursor-not-allowed': disabled },
         className,
     );
@@ -107,7 +105,7 @@ const Button = ({
     return (
         <button
             className={finalClassName}
-            style={{ width, height, color, background, ...style }}
+            style={{ width, height, ...style }}
             disabled={disabled}
             onClick={onClick}
             title={tooltip}

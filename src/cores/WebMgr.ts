@@ -1,5 +1,6 @@
 import md5 from 'md5';
 import { isFunction, isNumber, isString } from '@/utils/Utils';
+import { domains } from '@/constants/Domain';
 
 export default class WebMgr {
     static instance: any = null;
@@ -15,9 +16,8 @@ export default class WebMgr {
 
     static keyChangeData: any = {};
 
-    public accessToken: string =
-        '';
-
+    public accessToken: string = '';
+    
     setToken = (t: string) => (this.accessToken = t);
     getToken = () => this.accessToken;
 
