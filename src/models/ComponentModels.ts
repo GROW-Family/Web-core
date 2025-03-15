@@ -144,3 +144,56 @@ export type AvatarProps = {
   onClick?: Function;
   imageProps?: any;
 };
+
+type TooltipPlacement =
+  | 'bottom-end'
+  | 'bottom-start'
+  | 'bottom'
+  | 'left-end'
+  | 'left-start'
+  | 'left'
+  | 'right-end'
+  | 'right-start'
+  | 'right'
+  | 'top-end'
+  | 'top-start'
+  | 'top';
+
+
+export type TooltipProps = {
+  title?: string | boolean;
+  placement?: TooltipPlacement;
+  noneWrap?: boolean;
+  center?: boolean;
+  hidden?: boolean;
+  className?: string;
+  delayAfterChange?: number;
+  disableInteractive?: boolean;
+  children: React.ReactNode;
+};
+
+type TextType = 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'div';
+type TextSize = 'text' | 'small' | 'smallBold' | 'medium' | 'mediumBold' | 'large' | 'largeBold' | 'extra' | 'bigextra' | 'header';
+type TextColor = 'primary' | 'success' | 'error' | 'info' | 'warning';
+
+export type TextProps = {
+  text: React.ReactNode;
+  color?: TextColor;
+  size?: TextSize;
+  type?: TextType;
+  className?: string;
+  style?: React.CSSProperties;
+};
+
+export type TextButtonProps = {
+  text: string;
+  color?: string;
+  tooltip?: any;
+  disabled?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  href?: string;
+  target?: "new" | "replace" | "push";
+  onClick?: (event: React.MouseEvent) => void;
+  noUnderline?: boolean;
+};

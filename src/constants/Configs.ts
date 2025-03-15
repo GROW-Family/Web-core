@@ -17,3 +17,5 @@ export const cookieProps = {
         origin: '4',
     },
 };
+
+export const utmKeys = ['utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
