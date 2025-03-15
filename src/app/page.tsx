@@ -1,3 +1,4 @@
+import Avatar from "@/components/common/Avatar";
 import Button from "@/components/common/Button";
 import ImageViewer from "@/components/common/ImageViewer";
 import Input from "@/components/common/Input";
@@ -13,6 +14,7 @@ export default function Home() {
       <Input
         label="Tên"
         placeholder="Nhập tên của bạn" />
+      <Avatar />
     </div>
   );
 }

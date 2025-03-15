@@ -114,3 +114,33 @@ export type InputProps = {
   isNoSpace?: boolean;
   isUppercase?: boolean;
 };
+
+export type LineProps = {
+  width?: number | string;
+  height?: number | string;
+  vertical?: boolean;
+  className?: any;
+  style?: any;
+  noMargin?: boolean;
+};
+
+export type AvatarProps = {
+  className?: string;
+  src?: string | ArrayBuffer;
+  name?: string;
+  style?: any;
+  size?: number;
+  txtSize?: number;
+  border?: string;
+  borderSize?: number;
+  borderColor?: string;
+  borderRadius?: number;
+  isCustomed?: boolean;
+  isDueTime?: boolean;
+  isPreview?: boolean;
+  isSvg?: boolean;
+  clickable?: boolean;
+  whiteBg?: boolean;
+  onClick?: Function;
+  imageProps?: any;
+};

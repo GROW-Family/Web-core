@@ -1,3 +1,7 @@
+import { domains } from "@/constants/Domain";
+
+const validUrlProtocols: string[] = ['http', 'blob', 'data:', 'content:', '/_next', 'file:'];
+
 export const getImageSize = (
     url: string,
   ): Promise<{ width: number; height: number }> => {
@@ -15,3 +19,11 @@ export const getImageSize = (
     });
   };
   
+  export const getUploadFileUrl = (url: any, fallbackUrl: string = '') => {
+    url = String(url?.default || url || '');
+    if (!url) return fallbackUrl;
+    if (!validUrlProtocols.some((i) => url.startsWith(i))) {
+        url = domains.cdn + url;
+    }
+    return url;
+};

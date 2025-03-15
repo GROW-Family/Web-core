@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+import { getI18nLng } from '@/libs/i18n';
+
 import { isJSON, isString } from '@/utils/Utils';
 import { getToken } from '@/utils/WebUtils';
+import { getCookie, getCookieName } from '@/utils/CookieUtils';
+import { jwtDecode } from '@/utils/EncryptUtils';
 
 import { REQ_API_TIMEOUT } from '@/constants/Configs';
 
@@ -10,6 +14,7 @@ type TRequest = {
     body?: any;
     header?: any;
     timeout?: number;
+    accessToken?: string;
     responseType?: string;
     noTimeout?: boolean;
     noAuth?: boolean;
@@ -34,7 +39,17 @@ export default class ApiMgr {
     async doRequest(
         method: string,
         url: string,
-        { cancelId, body, header, timeout, noTimeout, noAuth, isUpload, responseType = 'json' }: TRequest = {},
+        {
+            cancelId,
+            body,
+            header,
+            timeout,
+            noTimeout,
+            noAuth,
+            accessToken,
+            isUpload,
+            responseType = 'json',
+        }: TRequest = {},
     ) {
         try {
             let reqHeader: any = {
@@ -42,6 +57,17 @@ export default class ApiMgr {
                 ...header,
             };
             let data = body || '{}';
+            let validAccessToken,
+                reqUrl = String(url) || '',
+                defaultParam = `lng=${getI18nLng() || 'en'}`;
+            const { access_token } = getCookie(getCookieName()) || {};
+            reqUrl += `${reqUrl.includes('?') ? (reqUrl.endsWith('&') ? '' : '&') : '?'}${defaultParam}`;
+            if (!noAuth || accessToken) {
+                validAccessToken = await this.validateAccessToken(accessToken || access_token);
+                if (validAccessToken) {
+                    reqHeader.Authorization = `Bearer ${validAccessToken.token}`;
+                }
+            }
             if (!noAuth) reqHeader.Authorization = `Bearer ${getToken()}`;
             if (!isUpload && isJSON(body)) data = JSON.stringify(body);
             const reqConfig: any = {
@@ -143,6 +169,27 @@ export default class ApiMgr {
     }
 
     // START: api handler
+
+    validateAccessToken(accessToken: string | undefined): Promise<{ decoded: any; token: string } | undefined> {
+        return new Promise((resolve) => {
+            let cookieName = getCookieName();
+            let webCookie = getCookie(cookieName);
+            if (!accessToken) accessToken = webCookie?.access_token;
+            if (!accessToken) {
+                return resolve(undefined);
+            }
+            const decoded = jwtDecode(accessToken) || {};
+            if (typeof decoded === 'object' && 'exp' in decoded && (decoded.exp ?? 0) * 1000 < Date.now()) {
+                if (!ApiMgr.isRedirectToLoginPage) {
+                    ApiMgr.isRedirectToLoginPage = true;
+                    console.log(`[DEBUG] forceLogout ~ Expired!`);
+                    return resolve(undefined);
+                }
+            } else {
+                resolve({ decoded, token: accessToken });
+            }
+        });
+    }
 
     validateResponseData({ data }: any, responseType: string) {
         try {
