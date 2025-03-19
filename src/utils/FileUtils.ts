@@ -20,7 +20,7 @@ export const getImageSize = (
   };
   
   export const getUploadFileUrl = (url: any, fallbackUrl: string = '') => {
-    url = String(url?.default || url || '');
+    url = String(url?.default || url || url.src || '');
     if (!url) return fallbackUrl;
     if (!validUrlProtocols.some((i) => url.startsWith(i))) {
         url = domains.cdn + url;

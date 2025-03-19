@@ -38,7 +38,6 @@ const Avatar: React.FC<AvatarProps & HocsProps<any>> = ({
 }: AvatarProps & HocsProps<any>) => {
     const [isError, setErrorStatus] = useState<boolean>(false);
     const [borderClsx, setBorderClsx] = useState<any>();
-
     useEffect(() => {
         isError && setErrorStatus(false);
     }, [src, name]);
@@ -110,7 +109,7 @@ const Avatar: React.FC<AvatarProps & HocsProps<any>> = ({
                         clickable={isClickable}
                         size={avatarSize}
                         isSvg={isSvg}
-                        src={(isPreview && src) || getUploadFileUrl(src)}
+                        src={src}
                         onError={() => setErrorStatus(true)}
                         {...imageProps}
                     />

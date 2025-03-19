@@ -100,6 +100,10 @@ const ImageViewer = ({
         handleGetExpectSize();
     }, [useRatio]);
 
+    useEffect(() => {
+        setSource(getSRC(src?.src));
+    }, [src.src]);
+
     const baseClass = clsx(
         `flex h-full`,
         resizeMode && `object-${resizeMode}`,
@@ -247,7 +251,12 @@ const ImageViewer = ({
             beforeInjection: handleBeforeInjection,
             afterInjection: handleAfterInjection,
         });
-        return <ReactSVG {...{ ...imgPropProducts, ...svg, src: source, style: _style }} />;
+        return (
+            <ReactSVG
+                {...{ ...imgPropProducts, ...svg, src: source }}
+                style={{ width: imgConstraint.width, height: imgConstraint.height, ..._style }}
+            />
+        );
     }
 
     return (

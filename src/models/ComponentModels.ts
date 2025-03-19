@@ -5,7 +5,7 @@ export type ButtonProps = {
   size?: number | string; // 'small' | 'medium' | 'large' | Number | String
   color?: string;
   variant?: string; // 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning'
-  tooltip?: string;
+  tooltip?: any;
   outlined?: boolean;
   blank?: boolean;
   fullWidth?: boolean;
@@ -126,7 +126,7 @@ export type LineProps = {
 
 export type AvatarProps = {
   className?: string;
-  src?: string | ArrayBuffer;
+  src?: any;
   name?: string;
   style?: any;
   size?: number;
@@ -196,4 +196,21 @@ export type TextButtonProps = {
   target?: "new" | "replace" | "push";
   onClick?: (event: React.MouseEvent) => void;
   noUnderline?: boolean;
+};
+
+export type CheckboxProps = {
+  className?: string;
+  style?: React.CSSProperties;
+  gap?: number;
+  label?: string;
+  labelLeft?: boolean;
+  checked?: boolean;
+  isDisabledColor?: boolean;
+  checkedColor?: string;
+  maxWidth?: boolean;
+  disabled?: boolean;
+  softDisabled?: boolean;
+  isCircle?: boolean;
+  onChange?: (e: React.MouseEvent) => void;
+  tooltip?: string;
 };

@@ -6,6 +6,7 @@ import ImageViewer from './ImageViewer';
 import { colorStyle, variants } from '@/styles/theme';
 
 import { ButtonProps } from '@/models/ComponentModels';
+import Tooltip from './Tooltip';
 
 const Button = ({
     text,
@@ -102,7 +103,7 @@ const Button = ({
         );
     }
 
-    return (
+    const btnNode = (
         <button
             className={finalClassName}
             style={{ width, height, ...style }}
@@ -113,6 +114,9 @@ const Button = ({
             {loading ? _renderLoading() : buttonContent}
         </button>
     );
+
+    return tooltip ? <Tooltip {...tooltip}>{btnNode}</Tooltip> : btnNode;
+
 };
 
 export default Button;
